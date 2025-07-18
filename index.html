@@ -1,48 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshad’s Soundboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* CSS is unchanged and remains excellent */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 30px 20px; min-height: 100vh;
-            background-color: #1a1a2e;
-            background-image:
-                radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
-                radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
-                radial-gradient(at 52% 99%, hsla(355, 98%, 61%, 0.2) 0px, transparent 50%),
-                radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.2) 0px, transparent 50%);
-            background-attachment: fixed; color: #f0f0f0;
-        }
-        #title-container { text-align: center; margin-bottom: 40px; }
-        #title-container h1 { font-size: 2.8rem; font-weight: 600; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
-        #title-container p { color: #e0e0e0; max-width: 550px; font-weight: 300; }
-        #soundboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; width: 100%; max-width: 1000px; }
-        .sound-container {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            padding: 20px 15px; text-align: center; transition: background 0.2s ease, transform 0.2s ease;
-        }
-        .sound-container:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-4px); }
-        .sound-name { font-weight: 500; margin-bottom: 15px; text-transform: capitalize; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .controls { display: flex; justify-content: center; gap: 10px; }
-        .control-button {
-            border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.2rem; color: #fff; cursor: pointer;
-            transition: background-color .2s, transform .1s; display: flex; align-items: center; justify-content: center;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .control-button:active { transform: scale(0.95); }
-        .play-button { background-color: rgba(0, 123, 255, 0.7); }
-        .play-button:hover { background-color: rgba(0, 123, 255, 1); }
-        .pause-button { background-color: rgba(220, 53, 69, 0.7); }
-        .pause-button:hover { background-color: rgba(220, 53, 69, 1); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshad’s Soundboard</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    /* 🎨 Visuals are still your original “frosted glass” palette */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        display: flex; flex-direction: column; align-items: center;
+        padding: 30px 20px; min-height: 100vh;
+        background-color: #1a1a2e;
+        background-image:
+            radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
+            radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
+            radial-gradient(at 52% 99%, hsla(355, 98%, 61%, 0.2) 0px, transparent 50%),
+            radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.2) 0px, transparent 50%);
+        background-attachment: fixed;
+        color: #f0f0f0;
+    }
+    #title-container { text-align: center; margin-bottom: 40px; }
+    #title-container h1 { font-size: 2.8rem; font-weight: 600; margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+    #title-container p { color: #e0e0e0; max-width: 550px; font-weight: 300; }
+    #soundboard {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px; width: 100%; max-width: 1000px;
+    }
+    .sound-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        padding: 20px 15px; text-align: center;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .sound-container:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-4px); }
+    .sound-container.playing { box-shadow: 0 0 0 3px rgba(0,123,255,.7); }   /* 🔊 now-playing glow */
+    .sound-name { font-weight: 500; margin-bottom: 15px; text-transform: capitalize;
+        color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .controls { display: flex; justify-content: center; gap: 10px; }
+    .control-button {
+        border: none; border-radius: 50%; width: 44px; height: 44px;
+        font-size: 1.2rem; color: #fff; cursor: pointer;
+        transition: background-color .2s, transform .1s;
+        display: flex; align-items: center; justify-content: center;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .control-button:active { transform: scale(0.95); }
+    .play-button  { background-color: rgba(0, 123, 255, 0.7); }
+    .play-button:hover  { background-color: rgba(0, 123, 255, 1); }
+    .pause-button { background-color: rgba(220, 53, 69, 0.7); }
+    .pause-button:hover { background-color: rgba(220, 53, 69, 1); }
+</style>
 </head>
 
 <body>
@@ -50,96 +67,120 @@
         <h1>Akshad’s Soundboard</h1>
         <p>A collection of curated sounds from the legend himself. Built with a modern glass theme and optimized for every device.</p>
     </div>
-    <div id="soundboard">
-        <h2>Loading Sounds...</h2>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const soundboard = document.getElementById('soundboard');
+    <div id="soundboard"><h2>Loading Sounds...</h2></div>
 
-            // --- THE ULTIMATE FIX: A SINGLE AUDIO PLAYER ---
-            const audioPlayer = new Audio();
-            let currentSrc = null; // Track the current sound source
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-            // Your GitHub repository details
-            const githubUser = 'jeffthepineapple';
-            const githubRepo = 'Akshad';
-            const soundsDirectory = 'sounds';
-            const branch = 'main';
+    const soundboard   = document.getElementById('soundboard');
+    const audioPlayer  = new Audio();   // 🥁 the one-and-only player
+    let   currentSrc   = null;          // remembers which clip is loaded
 
-            const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDirectory}`;
+    /* Repo settings */
+    const githubUser      = 'jeffthepineapple';
+    const githubRepo      = 'Akshad';
+    const soundsDirectory = 'sounds';
+    const branch          = 'main';
 
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error(`GitHub API Error: ${response.status}`);
-                    return response.json();
-                })
-                .then(files => {
-                    soundboard.innerHTML = '';
-                    if (!Array.isArray(files) || files.length === 0) {
-                        soundboard.innerHTML = '<h2>No sounds found in the repository.</h2>';
-                        return;
-                    }
+    /* GitHub REST API request (with the recommended Accept header) */
+    const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDirectory}?ref=${branch}`;
 
-                    files.forEach(file => {
-                        if (file.type !== 'file' || !/\.(mp3|wav|ogg)$/i.test(file.name)) return;
+    fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github+json' } })
+    .then(response => {
+        /* Graceful rate-limit message (60 unauth’d calls/hour) */
+        if (response.status === 403 && response.headers.get('X-RateLimit-Remaining') === '0') {
+            throw new Error('GitHub rate-limit hit. Please try again in about a minute.');
+        }
+        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+        return response.json();
+    })
+    .then(files => {
+        soundboard.innerHTML = '';
 
-                        const soundName = file.name.replace(/[-_]/g, ' ').replace(/\.(mp3|wav|ogg)$/i, '');
-                        const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
-                        
-                        // Create UI elements
-                        const container = document.createElement('div');
-                        container.className = 'sound-container';
-                        const label = document.createElement('div');
-                        label.className = 'sound-name';
-                        label.textContent = soundName;
-                        const controls = document.createElement('div');
-                        controls.className = 'controls';
-                        const playBtn = document.createElement('button');
-                        playBtn.className = 'control-button play-button';
-                        playBtn.innerHTML = '►';
-                        const pauseBtn = document.createElement('button');
-                        pauseBtn.className = 'control-button pause-button';
-                        pauseBtn.innerHTML = '⏸';
-                        controls.append(playBtn, pauseBtn);
-                        container.append(label, controls);
-                        soundboard.appendChild(container);
+        if (!Array.isArray(files) || files.length === 0) {
+            soundboard.innerHTML = '<h2>No sounds found in the repository.</h2>';
+            return;
+        }
 
-                        // --- EVENT LISTENERS (The "Single Player" Pattern) ---
+        /* Build a tile for each audio file */
+        files.forEach(file => {
+            if (file.type !== 'file' || !/\.(mp3|wav|ogg)$/i.test(file.name)) return;
 
-                        playBtn.addEventListener('click', () => {
-                            // If the user clicks the same button twice, restart the sound.
-                            // Otherwise, load the new sound.
-                            if (currentSrc !== audioUrl) {
-                                audioPlayer.src = audioUrl;
-                                currentSrc = audioUrl;
-                            }
-                            
-                            // The single, direct action that mobile browsers want to see.
-                            const playPromise = audioPlayer.play();
+            const soundName = file.name
+                .replace(/[-_]/g, ' ')
+                .replace(/\.(mp3|wav|ogg)$/i, '');
 
-                            if (playPromise !== undefined) {
-                                playPromise.catch(error => {
-                                    // This catch is now just a safety net. The main error should be gone.
-                                    console.error("Playback error:", error);
-                                });
-                            }
-                        });
+            const audioUrl =
+                `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
 
-                        pauseBtn.addEventListener('click', () => {
-                            // Only pause if this is the sound currently loaded in the player.
-                            if (currentSrc === audioUrl) {
-                                audioPlayer.pause();
-                            }
-                        });
-                    });
-                })
-                .catch(err => {
-                    soundboard.innerHTML = '<h2>Failed to load sounds from GitHub.</h2>';
-                    console.error("Soundboard Setup Error:", err);
-                });
+            /* --- DOM elements --- */
+            const container = document.createElement('div');
+            container.className = 'sound-container';
+            container.tabIndex  = 0;                           // 🔑 keyboard focus
+
+            const label = document.createElement('div');
+            label.className = 'sound-name';
+            label.textContent = soundName;
+
+            const controls = document.createElement('div');
+            controls.className = 'controls';
+
+            const playBtn  = document.createElement('button');
+            playBtn.className = 'control-button play-button';
+            playBtn.innerHTML = '►';
+
+            const pauseBtn = document.createElement('button');
+            pauseBtn.className = 'control-button pause-button';
+            pauseBtn.innerHTML = '⏸';
+
+            controls.append(playBtn, pauseBtn);
+            container.append(label, controls);
+            soundboard.appendChild(container);
+
+            /* --- helper: kick off playback, managing the single shared <audio> --- */
+            function playSound(url) {
+                if (currentSrc !== url) {
+                    audioPlayer.pause();       // stop any previous clip
+                    audioPlayer.src = url;
+                    audioPlayer.currentTime = 0;
+                    currentSrc = url;
+                }
+                audioPlayer.play()
+                    .catch(err => console.error('Playback error:', err));
+            }
+
+            /* --- UI state (highlight the tile that’s playing) --- */
+            const updateUI = () => {
+                document
+                    .querySelectorAll('.sound-container.playing')
+                    .forEach(el => el.classList.remove('playing'));
+
+                if (currentSrc === audioUrl && !audioPlayer.paused) {
+                    container.classList.add('playing');
+                }
+            };
+
+            /* --- Event hooks --- */
+            playBtn.addEventListener('pointerdown', () => playSound(audioUrl)); // ✅ counts as a gesture everywhere
+            pauseBtn.addEventListener('pointerdown', () => {
+                if (currentSrc === audioUrl) audioPlayer.pause();
+            });
+
+            container.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') playSound(audioUrl);     // 🔑 keyboard trigger
+            });
+
+            audioPlayer.addEventListener('play',   updateUI);
+            audioPlayer.addEventListener('pause',  updateUI);
+            audioPlayer.addEventListener('ended',  updateUI);
         });
-    </script>
+    })
+    .catch(err => {
+        soundboard.innerHTML = `<h2>${err.message}</h2>`;
+        console.error('Soundboard setup error:', err);
+    });
+});
+</script>
 </body>
 </html>
