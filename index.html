@@ -1,209 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akshad's Greatest Hits</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Waltograph&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Akshad’s Soundboard</title>
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #FFF8E1; /* A soft yellow for our bee theme */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23FBC02D' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-        #title-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
 
-        #title-container h1 {
-            font-family: 'Waltograph', cursive;
-            font-size: 4rem;
-            color: #D32F2F; /* Minnie Mouse Red */
-            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-            margin: 0;
-        }
+    /* --- HEADER --- */
+    #title-container {
+      text-align: center;
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+    #title-container h1 {
+      font-size: 2.5rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    #title-container p {
+      font-size: 1rem;
+      color: #555;
+    }
 
-        #title-container p {
-            font-size: 1.2rem;
-            color: #333;
-            margin-top: 5px;
-            max-width: 600px;
-        }
+    /* --- SOUNDBOARD GRID --- */
+    #soundboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 960px;
+    }
+    .sound-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.1s;
+    }
+    .sound-container:hover {
+      transform: translateY(-2px);
+    }
+    .sound-name {
+      font-weight: 500;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+      color: #222;
+    }
 
-        #soundboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 25px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 5px solid #000;
-            border-radius: 25px; /* Rounded corners like a cartoon */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .sound-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #FFEB3B; /* Bee Yellow */
-            border: 2px solid #000;
-            border-radius: 15px;
-            padding: 10px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-        }
-
-        .sound-name {
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 10px;
-            text-transform: capitalize;
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        .control-button {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            border: 2px solid #000;
-            border-radius: 50%;
-            background-color: #fff;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s, transform 0.1s;
-        }
-
-        .control-button:hover {
-            background-color: #FDD835; /* Darker Yellow */
-        }
-        
-        .control-button:active {
-            transform: scale(0.95);
-        }
-
-        .play-button { color: #4CAF50; } /* Green for play */
-        .pause-button { color: #f44336; } /* Red for pause */
-
-    </style>
+    /* --- BUTTONS --- */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .control-button {
+      border: none;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+    .control-button:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .play-button {
+      background-color: #007BFF;
+    }
+    .play-button:hover {
+      background-color: #0056b3;
+    }
+    .pause-button {
+      background-color: #DC3545;
+    }
+    .pause-button:hover {
+      background-color: #a71d2a;
+    }
+  </style>
 </head>
 <body>
 
-<div id="title-container">
-    <h1>Akshad's Buzzy Soundboard!</h1>
-    <p>Is it a bird? Is it a plane? No, it's the unmistakable buzz of Akshad's greatest hits. Press the buttons, if you dare. We're not responsible for any sudden cravings for honey or polka-dot bows.</p>
-</div>
+  <div id="title-container">
+    <h1>Akshad’s Soundboard</h1>
+    <p>Click a button to play one of Akshad’s curated audio clips. Lazy-loading ensures fast initial load—only fetch what you play.</p>
+  </div>
 
-<div id="soundboard">
-    <h2>Fetching Akshad's greatest hits...</h2>
-</div>
+  <div id="soundboard">
+    <h2>Loading sound list…</h2>
+  </div>
 
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const soundboard = document.getElementById('soundboard');
-        let currentlyPlaying = null; // To keep track of the playing audio
+      const soundboard = document.getElementById('soundboard');
+      let currentlyPlaying = null;
 
-        const githubUser = 'jeffthepineapple';
-        const githubRepo = 'Akshad';
-        const soundsDirectory = 'sounds';
-        const mainBranch = 'main';
+      const githubUser = 'jeffthepineapple';
+      const githubRepo = 'Akshad';
+      const soundsDir = 'sounds';
+      const mainBranch = 'main';
+      const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDir}`;
 
-        const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDirectory}`;
+      fetch(apiUrl)
+        .then(res => {
+          if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+          return res.json();
+        })
+        .then(files => {
+          soundboard.innerHTML = '';
+          if (!Array.isArray(files) || files.length === 0) {
+            soundboard.innerHTML = '<h2>No sounds found.</h2>';
+            return;
+          }
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) throw new Error(`Network response was not ok, status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
-                soundboard.innerHTML = ''; 
-                if (Array.isArray(data) && data.length > 0) {
-                    data.forEach(file => {
-                        if (file.type === 'file' && (file.name.endsWith('.mp3') || file.name.endsWith('.wav') || file.name.endsWith('.ogg'))) {
-                            
-                            const soundName = file.name.split('.')[0].replace(/[-_]/g, ' ');
+          files.forEach(file => {
+            if (file.type !== 'file' || !file.name.endsWith('.mp3')) return;
 
-                            // Create elements
-                            const container = document.createElement('div');
-                            container.classList.add('sound-container');
+            const soundName = file.name.replace(/[-_]/g,' ').replace(/\.mp3$/, '');
+            const container = document.createElement('div');
+            container.className = 'sound-container';
 
-                            const nameLabel = document.createElement('div');
-                            nameLabel.classList.add('sound-name');
-                            nameLabel.innerText = soundName;
+            const nameLabel = document.createElement('div');
+            nameLabel.className = 'sound-name';
+            nameLabel.textContent = soundName;
 
-                            const controlsDiv = document.createElement('div');
-                            controlsDiv.classList.add('controls');
+            const controlsDiv = document.createElement('div');
+            controlsDiv.className = 'controls';
 
-                            const playButton = document.createElement('button');
-                            playButton.classList.add('control-button', 'play-button');
-                            playButton.innerHTML = '►'; // Play icon
+            const playButton = document.createElement('button');
+            playButton.className = 'control-button play-button';
+            playButton.textContent = '►';
 
-                            const pauseButton = document.createElement('button');
-                            pauseButton.classList.add('control-button', 'pause-button');
-                            pauseButton.innerHTML = '⏸'; // Pause icon
-                            
-                            const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${mainBranch}/${file.path}`;
-                            const audio = new Audio(audioUrl);
+            const pauseButton = document.createElement('button');
+            pauseButton.className = 'control-button pause-button';
+            pauseButton.textContent = '⏸';
 
-                            // Play functionality
-                            playButton.addEventListener('click', () => {
-                                // If another sound is playing, pause it
-                                if (currentlyPlaying && currentlyPlaying !== audio) {
-                                    currentlyPlaying.pause();
-                                    currentlyPlaying.currentTime = 0;
-                                }
-                                audio.play();
-                                currentlyPlaying = audio;
-                            });
+            controlsDiv.append(playButton, pauseButton);
+            container.append(nameLabel, controlsDiv);
+            soundboard.appendChild(container);
 
-                            // Pause functionality
-                            pauseButton.addEventListener('click', () => {
-                                audio.pause();
-                                currentlyPlaying = null;
-                            });
+            // Lazy-loaded audio
+            const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${mainBranch}/${file.path}`;
+            let audio = null;
 
-                            // Rewind when finished
-                            audio.addEventListener('ended', () => {
-                                audio.currentTime = 0;
-                                currentlyPlaying = null;
-                            });
-
-                            // Assemble the component
-                            controlsDiv.appendChild(playButton);
-                            controlsDiv.appendChild(pauseButton);
-                            container.appendChild(nameLabel);
-                            container.appendChild(controlsDiv);
-                            soundboard.appendChild(container);
-                        }
-                    });
-                } else {
-                    soundboard.innerHTML = '<h2>Looks like the hive is empty! No sounds found.</h2>';
-                }
-            })
-            .catch(error => {
-                soundboard.innerHTML = '<h2>Oh bother! Could not fetch the sounds.</h2><p>Check the console (F12) for nerdy details.</p>';
-                console.error('There was a problem with the fetch operation:', error);
+            playButton.addEventListener('click', () => {
+              // pause any other
+              if (currentlyPlaying && currentlyPlaying !== audio) {
+                currentlyPlaying.pause();
+                currentlyPlaying.currentTime = 0;
+              }
+              // create on first play
+              if (!audio) {
+                audio = new Audio(audioUrl);
+                audio.preload = 'none';
+                audio.addEventListener('ended', () => {
+                  audio.currentTime = 0;
+                  currentlyPlaying = null;
+                });
+                audio.addEventListener('error', () => {
+                  console.error(`Error loading ${file.name}`, audio.error);
+                });
+              }
+              audio.play();
+              currentlyPlaying = audio;
             });
-    });
-</script>
 
+            pauseButton.addEventListener('click', () => {
+              if (audio) {
+                audio.pause();
+                currentlyPlaying = null;
+              }
+            });
+          });
+        })
+        .catch(err => {
+          soundboard.innerHTML = '<h2>Error fetching sounds.</h2>';
+          console.error(err);
+        });
+    });
+  </script>
 </body>
 </html>
