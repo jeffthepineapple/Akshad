@@ -27,13 +27,10 @@
             /* Glassmorphism Background */
             background-color: #1a1a2e;
             background-image:
-                radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 1) 0px, transparent 50%),
-                radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-                radial-gradient(at 52% 99%, hsla(355, 98%, 61%, 1) 0px, transparent 50%),
-                radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-                radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
-                radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-                radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+                radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 52% 99%, hsla(355, 98%, 61%, 0.2) 0px, transparent 50%),
+                radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.2) 0px, transparent 50%);
             background-attachment: fixed;
             color: #f0f0f0;
         }
@@ -68,8 +65,8 @@
         .sound-container {
             /* The Glass Effect */
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* For Safari */
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -111,6 +108,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent; /* Removes tap flash on mobile */
         }
 
         .control-button:active {
@@ -140,12 +138,39 @@
             const soundboard = document.getElementById('soundboard');
             let currentlyPlaying = null; // To track the currently playing audio object
 
+            // Your GitHub repository details
             const githubUser = 'jeffthepineapple';
             const githubRepo = 'Akshad';
             const soundsDirectory = 'sounds';
             const branch = 'main';
 
             const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDirectory}`;
+
+            // --- CENTRAL AUDIO HANDLING FUNCTION ---
+            function playAudio(audioElement) {
+                // If another audio is already playing, stop it first.
+                if (currentlyPlaying && currentlyPlaying !== audioElement) {
+                    currentlyPlaying.pause();
+                    currentlyPlaying.currentTime = 0;
+                }
+
+                // Play the new audio. This returns a Promise.
+                const playPromise = audioElement.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Playback started successfully!
+                        currentlyPlaying = audioElement;
+                    }).catch(error => {
+                        // Playback failed. This can happen for many reasons.
+                        // For example, the user might quickly click another play button.
+                        console.error("Audio playback failed:", error);
+                        if (currentlyPlaying === audioElement) {
+                            currentlyPlaying = null;
+                        }
+                    });
+                }
+            }
 
             fetch(apiUrl)
                 .then(response => {
@@ -160,33 +185,27 @@
                     }
 
                     files.forEach(file => {
-                        // We only care about .mp3, .wav, and .ogg files
                         if (file.type !== 'file' || !/\.(mp3|wav|ogg)$/i.test(file.name)) return;
 
                         const soundName = file.name.replace(/[-_]/g, ' ').replace(/\.(mp3|wav|ogg)$/i, '');
-
-                        // --- THE MOBILE FIX IS HERE ---
-                        // Create the Audio object immediately, but don't load it yet.
-                        // This allows the `.play()` call later to be seen as a direct result of user interaction.
-                        const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
-                        const audio = new Audio(audioUrl);
-                        audio.preload = 'none'; // Important for performance: don't load all files at once.
                         
+                        // Create the Audio object immediately but do not load it.
+                        const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
+                        const audio = new Audio();
+                        audio.src = audioUrl;
+                        audio.preload = 'none'; 
+
                         // Create UI elements
                         const container = document.createElement('div');
                         container.className = 'sound-container';
-
                         const label = document.createElement('div');
                         label.className = 'sound-name';
                         label.textContent = soundName;
-
                         const controls = document.createElement('div');
                         controls.className = 'controls';
-
                         const playBtn = document.createElement('button');
                         playBtn.className = 'control-button play-button';
                         playBtn.innerHTML = '►'; // Play icon
-
                         const pauseBtn = document.createElement('button');
                         pauseBtn.className = 'control-button pause-button';
                         pauseBtn.innerHTML = '⏸'; // Pause icon
@@ -195,36 +214,33 @@
                         container.append(label, controls);
                         soundboard.appendChild(container);
 
-                        // --- EVENT LISTENERS ---
+                        // --- EVENT LISTENERS (The Fix is Here) ---
+                        // Use a more reliable event for mobile: 'touchend' or 'click'
+                        const triggerEvent = 'click';
 
-                        playBtn.addEventListener('click', () => {
-                            // If another audio is playing, stop it.
-                            if (currentlyPlaying && currentlyPlaying !== audio) {
-                                currentlyPlaying.pause();
-                                currentlyPlaying.currentTime = 0;
-                            }
-                            
-                            // Play the audio. This is a direct user action, so mobile browsers allow it.
-                            audio.play().catch(e => console.error("Play Error:", e));
-                            currentlyPlaying = audio;
+                        playBtn.addEventListener(triggerEvent, () => {
+                            // Call the central play function. This is the only action.
+                            // It's direct, immediate, and satisfies mobile browser policies.
+                            playAudio(audio);
                         });
 
-                        pauseBtn.addEventListener('click', () => {
+                        pauseBtn.addEventListener(triggerEvent, () => {
                             audio.pause();
                             if (currentlyPlaying === audio) {
                                 currentlyPlaying = null;
                             }
                         });
                         
-                        // Reset when finished playing
                         audio.addEventListener('ended', () => {
-                            currentlyPlaying = null;
+                            if (currentlyPlaying === audio) {
+                                currentlyPlaying = null;
+                            }
                         });
                     });
                 })
                 .catch(err => {
                     soundboard.innerHTML = '<h2>Failed to load sounds from GitHub.</h2>';
-                    console.error("Soundboard Error:", err);
+                    console.error("Soundboard Setup Error:", err);
                 });
         });
     </script>
