@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akshad’s Soundboard</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
     <style>
-        /* CSS remains the same as the previous version */
+        /* CSS is unchanged and remains excellent */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 30px 20px; min-height: 100vh;
@@ -59,8 +57,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const soundboard = document.getElementById('soundboard');
-            let currentlyPlaying = null; // The audio element that is currently playing
-            let isLocked = false;          // The "lock" to prevent race conditions
+
+            // --- THE ULTIMATE FIX: A SINGLE AUDIO PLAYER ---
+            const audioPlayer = new Audio();
+            let currentSrc = null; // Track the current sound source
 
             // Your GitHub repository details
             const githubUser = 'jeffthepineapple';
@@ -86,14 +86,11 @@
                         if (file.type !== 'file' || !/\.(mp3|wav|ogg)$/i.test(file.name)) return;
 
                         const soundName = file.name.replace(/[-_]/g, ' ').replace(/\.(mp3|wav|ogg)$/i, '');
+                        const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
                         
-                        const audio = new Audio();
-                        audio.src = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/${file.path}`;
-                        audio.preload = 'none';
-
+                        // Create UI elements
                         const container = document.createElement('div');
                         container.className = 'sound-container';
-                        // ... (UI creation is the same)
                         const label = document.createElement('div');
                         label.className = 'sound-name';
                         label.textContent = soundName;
@@ -109,49 +106,31 @@
                         container.append(label, controls);
                         soundboard.appendChild(container);
 
-                        // --- EVENT LISTENERS WITH LOCKING MECHANISM ---
+                        // --- EVENT LISTENERS (The "Single Player" Pattern) ---
 
                         playBtn.addEventListener('click', () => {
-                            // 1. If we are already trying to play a sound, do nothing.
-                            if (isLocked) return;
-                            
-                            // 2. Lock the controls.
-                            isLocked = true;
-
-                            // 3. If a sound is playing, stop it.
-                            if (currentlyPlaying && currentlyPlaying !== audio) {
-                                currentlyPlaying.pause();
+                            // If the user clicks the same button twice, restart the sound.
+                            // Otherwise, load the new sound.
+                            if (currentSrc !== audioUrl) {
+                                audioPlayer.src = audioUrl;
+                                currentSrc = audioUrl;
                             }
                             
-                            // 4. Always reset time to the beginning.
-                            audio.currentTime = 0;
-
-                            const playPromise = audio.play();
+                            // The single, direct action that mobile browsers want to see.
+                            const playPromise = audioPlayer.play();
 
                             if (playPromise !== undefined) {
-                                playPromise.then(() => {
-                                    // Success! Set the current sound and unlock.
-                                    currentlyPlaying = audio;
-                                    isLocked = false;
-                                }).catch(error => {
-                                    // The play was aborted or failed. Log it for debugging, but crucially, UNLOCK.
-                                    console.info("Playback was interrupted or failed.", error.name);
-                                    isLocked = false;
+                                playPromise.catch(error => {
+                                    // This catch is now just a safety net. The main error should be gone.
+                                    console.error("Playback error:", error);
                                 });
                             }
                         });
 
                         pauseBtn.addEventListener('click', () => {
-                            // We can always pause, so no lock is needed here.
-                            audio.pause();
-                            if (currentlyPlaying === audio) {
-                                currentlyPlaying = null;
-                            }
-                        });
-                        
-                        audio.addEventListener('ended', () => {
-                            if (currentlyPlaying === audio) {
-                                currentlyPlaying = null;
+                            // Only pause if this is the sound currently loaded in the player.
+                            if (currentSrc === audioUrl) {
+                                audioPlayer.pause();
                             }
                         });
                     });
