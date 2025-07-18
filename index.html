@@ -3,88 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Soundboard</title>
+    <title>Akshad's Greatest Hits</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Waltograph&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
         body {
-            font-family: sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFF8E1; /* A soft yellow for our bee theme */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23FBC02D' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
+
+        #title-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #title-container h1 {
+            font-family: 'Waltograph', cursive;
+            font-size: 4rem;
+            color: #D32F2F; /* Minnie Mouse Red */
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            margin: 0;
+        }
+
+        #title-container p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 5px;
+            max-width: 600px;
+        }
+
         #soundboard {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 5px solid #000;
+            border-radius: 25px; /* Rounded corners like a cartoon */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .sound-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FFEB3B; /* Bee Yellow */
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        }
+
+        .sound-name {
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        .controls {
+            display: flex;
             gap: 10px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
-            width: 90%;
         }
-        .sound-button {
-            padding: 20px;
-            font-size: 16px;
+
+        .control-button {
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #e9e9e9;
-            transition: background-color 0.3s;
+            border: 2px solid #000;
+            border-radius: 50%;
+            background-color: #fff;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.1s;
         }
-        .sound-button:hover {
-            background-color: #dcdcdc;
+
+        .control-button:hover {
+            background-color: #FDD835; /* Darker Yellow */
         }
+        
+        .control-button:active {
+            transform: scale(0.95);
+        }
+
+        .play-button { color: #4CAF50; } /* Green for play */
+        .pause-button { color: #f44336; } /* Red for pause */
+
     </style>
 </head>
 <body>
 
+<div id="title-container">
+    <h1>Akshad's Buzzy Soundboard!</h1>
+    <p>Is it a bird? Is it a plane? No, it's the unmistakable buzz of Akshad's greatest hits. Press the buttons, if you dare. We're not responsible for any sudden cravings for honey or polka-dot bows.</p>
+</div>
+
 <div id="soundboard">
-    <h2>Loading Sounds...</h2>
+    <h2>Fetching Akshad's greatest hits...</h2>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const soundboard = document.getElementById('soundboard');
+        let currentlyPlaying = null; // To keep track of the playing audio
 
-        // *** Configuration: Replace with your GitHub username and repository name ***
         const githubUser = 'jeffthepineapple';
         const githubRepo = 'Akshad';
         const soundsDirectory = 'sounds';
+        const mainBranch = 'main';
 
-        const apiUrl = `https://api.github.com/repos/jeffthepineapple/Akshad/contents/sounds`;
+        const apiUrl = `https://api.github.com/repos/${githubUser}/${githubRepo}/contents/${soundsDirectory}`;
 
         fetch(apiUrl)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error(`Network response was not ok, status: ${response.status}`);
+                return response.json();
+            })
             .then(data => {
-                soundboard.innerHTML = ''; // Clear the "Loading" message
-                if (Array.isArray(data)) {
+                soundboard.innerHTML = ''; 
+                if (Array.isArray(data) && data.length > 0) {
                     data.forEach(file => {
                         if (file.type === 'file' && (file.name.endsWith('.mp3') || file.name.endsWith('.wav') || file.name.endsWith('.ogg'))) {
-                            const button = document.createElement('button');
-                            button.classList.add('sound-button');
-                            button.innerText = file.name.split('.')[0]; // Use the filename without extension as the button text
                             
-                            // Construct the raw file URL
-                            const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/main/${file.path}`;
+                            const soundName = file.name.split('.')[0].replace(/[-_]/g, ' ');
+
+                            // Create elements
+                            const container = document.createElement('div');
+                            container.classList.add('sound-container');
+
+                            const nameLabel = document.createElement('div');
+                            nameLabel.classList.add('sound-name');
+                            nameLabel.innerText = soundName;
+
+                            const controlsDiv = document.createElement('div');
+                            controlsDiv.classList.add('controls');
+
+                            const playButton = document.createElement('button');
+                            playButton.classList.add('control-button', 'play-button');
+                            playButton.innerHTML = '►'; // Play icon
+
+                            const pauseButton = document.createElement('button');
+                            pauseButton.classList.add('control-button', 'pause-button');
+                            pauseButton.innerHTML = '⏸'; // Pause icon
+                            
+                            const audioUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${mainBranch}/${file.path}`;
                             const audio = new Audio(audioUrl);
 
-                            button.addEventListener('click', () => {
-                                audio.currentTime = 0; // Rewind to the start
+                            // Play functionality
+                            playButton.addEventListener('click', () => {
+                                // If another sound is playing, pause it
+                                if (currentlyPlaying && currentlyPlaying !== audio) {
+                                    currentlyPlaying.pause();
+                                    currentlyPlaying.currentTime = 0;
+                                }
                                 audio.play();
+                                currentlyPlaying = audio;
                             });
-                            soundboard.appendChild(button);
+
+                            // Pause functionality
+                            pauseButton.addEventListener('click', () => {
+                                audio.pause();
+                                currentlyPlaying = null;
+                            });
+
+                            // Rewind when finished
+                            audio.addEventListener('ended', () => {
+                                audio.currentTime = 0;
+                                currentlyPlaying = null;
+                            });
+
+                            // Assemble the component
+                            controlsDiv.appendChild(playButton);
+                            controlsDiv.appendChild(pauseButton);
+                            container.appendChild(nameLabel);
+                            container.appendChild(controlsDiv);
+                            soundboard.appendChild(container);
                         }
                     });
                 } else {
-                    soundboard.innerHTML = '<h2>Could not load sounds. Please check the repository settings.</h2>';
-                    console.error('Error fetching files:', data);
+                    soundboard.innerHTML = '<h2>Looks like the hive is empty! No sounds found.</h2>';
                 }
             })
             .catch(error => {
-                soundboard.innerHTML = '<h2>Error loading sounds.</h2>';
+                soundboard.innerHTML = '<h2>Oh bother! Could not fetch the sounds.</h2><p>Check the console (F12) for nerdy details.</p>';
                 console.error('There was a problem with the fetch operation:', error);
             });
     });
